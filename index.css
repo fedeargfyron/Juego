@@ -1,3 +1,10 @@
+:root{
+    --success-color: #77dd77;
+    --neutral-color: #ffda89;
+    --wrong-color: #4f4f4f;
+    --default-color: #808080;
+}
+
 body{
     display: flex;
     align-items: center;
@@ -5,38 +12,53 @@ body{
 }
 
 input{
-    width: 60px;
-    height: 60px;
-    border: 2px solid grey;
+    width: 65px;
+    height: 65px;
+    border: 2px solid var(--default-color);
     margin: .25rem;
-    font-size: 2.25rem;
+    font-size: 2rem;
     text-align: center;
     text-transform: uppercase;
     font-weight: bolder;
 }
 
 input:disabled{
-    background: grey;
+    background: var(--default-color);
 }
 
 .row{
     display: flex;
 }
- 
-.correct-input{
-    background: #77dd77 !important;
+
+.done{
     color: white;
     border: none;
+    animation-name: resultAnimation !important;
+    animation-duration: .5s !important;
+}
+
+.correct-input{
+    background: var(--success-color) !important;
 }
 
 .neutral-input{
-    background: #ffda89 !important;
-    color: white;
-    border: none;
+    background: var(--neutral-color) !important;
 }
 
 .wrong-input{
-    background: #c5c6c8 !important;
-    color: white;
-    border: none;
+    background: var(--wrong-color) !important;
+}
+
+.bounce{
+    animation: bounceAnimation .25s;
+}
+
+@keyframes bounceAnimation {
+    50% {transform: scale(1.2);}
+    100%{transform: scale(1);}
+}
+
+@keyframes resultAnimation {
+    50% {transform: scaleY(0);}
+    100%{transform: rotateX(1);}
 }
