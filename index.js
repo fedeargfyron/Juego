@@ -1,17 +1,19 @@
 let values = [
  
 ];
- 
-const word = "Quesos";
+
+const word = "Qe";
 const wordLength = word.length;
 const tries = 6;
  
 onload = () => {
     createBoard();
     let inputs = document.querySelectorAll("input");
-    inputs.forEach(x => x.addEventListener("keyup", validateInput));
-    inputs.forEach(x => x.addEventListener("keypress", validateRow));
+    inputs.forEach(x => x.addEventListener("keyup", validateInputValue));
+    inputs.forEach(x => x.addEventListener("keypress", confirmRow));
 }
+
+// Verificar valores de los inputs //
 
 const previousInputsResults = (previousInputs) => {
     let wordArr = Array.from(word.toLowerCase());
@@ -32,28 +34,27 @@ const previousInputsResults = (previousInputs) => {
         input.classList.add("wrong-input");
     }
 
-    console.log(correctInputs);
     if(correctInputs === wordLength){
-        return true;
+        return "Ganaste!";
+    }
+
+    if(values.length + 1 === tries){
+        return "Perdiste!";
     }
 }
 
-const successfulValidation = (previousInputs, newValues) => {
-    let correct = previousInputsResults(previousInputs);
-    if(correct){
-        return alert("Ganaste!");
-    }
-    values.push(newValues);
-    if(values.length === wordLength){
-        return alert("Perdiste!");
-    }
+// Habilitar nueva fila //
+
+const nextRowHandler = () => {
     let row = document.getElementById(`row${values.length}`);
     let inputs = [...row.getElementsByTagName("input")];
     inputs.forEach(x => x.disabled = false);
     inputs[0].focus();
 }
 
-const validateRow = (e) => {
+// Validar que la fila tenga valores en todos sus inputs //
+
+const confirmRow = (e) => {
     if(e.key !== "Enter")
         return;
  
@@ -64,10 +65,19 @@ const validateRow = (e) => {
         return;
     }
     inputs.forEach(x => x.disabled = true);
-    successfulValidation(inputs, newValues);
+
+    let message = previousInputsResults(inputs);
+    if(message){
+        return alert(message);
+    }
+
+    values.push(newValues);
+    nextRowHandler();
 }
- 
-const validateInput = (e) => {
+
+// Validar input enfocado y pasar al siguiente si tiene valor //
+
+const validateInputValue = (e) => {
     let target = e.target;
     if(target.value.length == 1){
         let next = target.nextElementSibling;
@@ -78,7 +88,20 @@ const validateInput = (e) => {
             next.focus();
     }
 }
- 
+
+// Creación de tablero //
+
+const createBoard = () => {
+    let form = document.getElementById("word-form");
+    for (let i = 0; i < tries; i++) {
+        let row = document.createElement("fieldset");
+        row.classList.add(`row`);
+        row.id = `row${i}`;
+        createInputs(row)
+        form.appendChild(row);
+    }
+}
+
 const createInputs = (row) => {
     for (let i = 0; i < wordLength; i++) {
         let input = document.createElement("input");
@@ -88,16 +111,5 @@ const createInputs = (row) => {
         }
         
         row.appendChild(input);
-    }
-}
- 
-const createBoard = () => {
-    let form = document.getElementById("word-form");
-    for (let i = 0; i < tries; i++) {
-        let row = document.createElement("fieldset");
-        row.classList.add(`row`);
-        row.id = `row${i}`;
-        createInputs(row)
-        form.appendChild(row);
     }
 }
