@@ -2,9 +2,9 @@ let values = [
  
 ];
 
-const word = "Qe";
+const word = "Quesos";
 const wordLength = word.length;
-const tries = 6;
+let tries = 6;
  
 onload = () => {
     createBoard();
@@ -38,7 +38,8 @@ const previousInputsResults = (previousInputs) => {
         return "Ganaste!";
     }
 
-    if(values.length + 1 === tries){
+    tries--;
+    if(tries === 0){
         return "Perdiste!";
     }
 }
