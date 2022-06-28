@@ -14,7 +14,6 @@ onload = async () => {
     inputs.forEach(x => x.addEventListener("keydown", verifyDelete));
 }
 
-
 const endGame = (win) => {
     let modal = document.getElementById('modal');
     let header = document.getElementById('encabezado-modal');
