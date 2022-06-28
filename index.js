@@ -138,6 +138,8 @@ const createBoard = async () => {
         createInputs(row)
         form.appendChild(row);
     }
+
+    document.getElementsByTagName("input")[0].focus();
 }
 
 const createInputs = (row) => {
