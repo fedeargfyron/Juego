@@ -18,6 +18,7 @@
 .encabezado-modal{
     font-size: 2rem;
     font-weight: bold;
+    color: var(--defeat-color);
 }
 
 @keyframes animatetop{

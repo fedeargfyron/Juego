@@ -18,14 +18,12 @@ onload = () => {
 const endGame = (win) => {
     let modal = document.getElementById('modal');
     let header = document.getElementById('encabezado-modal');
+
     if(win){
         header.innerHTML = "Ganaste!";
         header.style.color = "#77dd77";
     }
-    else{
-        header.innerHTML = "Perdiste!";
-        header.style.color = "red";
-    }
+    
     modal.style.display = "flex";
 }
 
