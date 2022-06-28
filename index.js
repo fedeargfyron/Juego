@@ -2,12 +2,12 @@ let values = [
 
 ];
 
-const word = "Q";
-const wordLength = word.length;
+let word;
+let wordLength;
 let tries = 5;
  
-onload = () => {
-    createBoard();
+onload = async () => {
+    await createBoard();
     let inputs = document.querySelectorAll("input");
     inputs.forEach(x => x.addEventListener("keyup", validateInputValue));
     inputs.forEach(x => x.addEventListener("keypress", confirmRow));
@@ -18,10 +18,10 @@ onload = () => {
 const endGame = (win) => {
     let modal = document.getElementById('modal');
     let header = document.getElementById('encabezado-modal');
-
+    document.getElementById("palabra").innerHTML = `Palabra: ${word}`
     if(win){
         header.innerHTML = "Ganaste!";
-        header.style.color = "#77dd77";
+        modal.classList.add("win");
     }
     
     modal.style.display = "flex";
@@ -128,7 +128,9 @@ const validateInputValue = (e) => {
 
 // Creación de tablero //
 
-const createBoard = () => {
+const createBoard = async () => {
+    word = await getPalabra();
+    wordLength = word.length;
     let form = document.getElementById("word-form");
     for (let i = 0; i < tries; i++) {
         let row = document.createElement("fieldset");
@@ -149,4 +151,34 @@ const createInputs = (row) => {
         
         row.appendChild(input);
     }
+}
+
+const getPalabra = async () => {
+    const url = "https://palabras-aleatorias-public-api.herokuapp.com/random";
+    let response = JSON.parse(await makeRequest("GET", url));
+    return response.body.Word;
+}
+
+const makeRequest = (method, url) => {
+    return new Promise(function (resolve, reject) {
+        let xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+        xhr.onload = function () {
+            if (this.status >= 200 && this.status < 300) {
+                resolve(xhr.response);
+            } else {
+                reject({
+                    status: this.status,
+                    statusText: xhr.statusText
+                });
+            }
+        };
+        xhr.onerror = function () {
+            reject({
+                status: this.status,
+                statusText: xhr.statusText
+            });
+        };
+        xhr.send();
+    });
 }

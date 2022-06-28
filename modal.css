@@ -6,8 +6,12 @@
     left: 50%;
     width: 100%;
     transform: translate(-50%, -50%);
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-size: 2rem;
     overflow: auto;
-    background-color: var(--wrong-color);
+    background-color: var(--defeat-color);
     padding: 1rem;
     justify-content: center;
     animation-name: animatetop;
@@ -17,8 +21,12 @@
 
 .encabezado-modal{
     font-size: 2rem;
+    margin-bottom: .5rem;
     font-weight: bold;
-    color: var(--defeat-color);
+}
+
+.win{
+    background-color: var(--success-color);
 }
 
 @keyframes animatetop{

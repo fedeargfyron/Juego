@@ -1,6 +1,6 @@
 :root{
-    --success-color: #77dd77;
-    --neutral-color: #ffda89;
+    --success-color: #6aaa64;
+    --neutral-color: #c9b458;
     --wrong-color: #4f4f4f;
     --default-color: #808080;
     --defeat-color: #ff6b6b;
@@ -10,6 +10,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: rgb(18 18 19);
 }
 
 input{
@@ -21,6 +22,10 @@ input{
     text-align: center;
     text-transform: uppercase;
     font-weight: bolder;
+}
+
+input:focus{
+    outline: none;
 }
 
 input:disabled{
