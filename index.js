@@ -2,9 +2,9 @@ let values = [
 
 ];
 
-const word = "Ques";
+const word = "Q";
 const wordLength = word.length;
-let tries = 4;
+let tries = 5;
  
 onload = () => {
     createBoard();
@@ -14,9 +14,24 @@ onload = () => {
     inputs.forEach(x => x.addEventListener("keydown", verifyDelete));
 }
 
+
+const endGame = (win) => {
+    let modal = document.getElementById('modal');
+    let header = document.getElementById('encabezado-modal');
+    if(win){
+        header.innerHTML = "Ganaste!";
+        header.style.color = "#77dd77";
+    }
+    else{
+        header.innerHTML = "Perdiste!";
+        header.style.color = "red";
+    }
+    modal.style.display = "flex";
+}
+
 // Verificar valores de los inputs //
 
-const previousInputsResults = (previousInputs) => {
+const previousInputsResults = (previousInputs, newValues) => {
     let wordArr = Array.from(word.toLowerCase());
     let correctInputs = 0;
     for (let i = 0; i < wordLength; i++) {
@@ -38,13 +53,16 @@ const previousInputsResults = (previousInputs) => {
     }
 
     if(correctInputs === wordLength){
-        return "Ganaste!";
+        return endGame(true);
     }
 
     tries--;
     if(tries === 0){
-        return "Perdiste!";
+        return endGame();
     }
+
+    values.push(newValues);
+    nextRowHandler();
 }
 
 // Habilitar nueva fila //
@@ -70,13 +88,7 @@ const confirmRow = (e) => {
     }
     inputs.forEach(x => x.disabled = true);
 
-    let message = previousInputsResults(inputs);
-    if(message){
-        return alert(message);
-    }
-
-    values.push(newValues);
-    nextRowHandler();
+    previousInputsResults(inputs, newValues);
 }
 
 const tryFocusInput = (sibling) => {
@@ -89,6 +101,8 @@ const tryFocusInput = (sibling) => {
         sibling.classList.remove("bounce");
     }
 }
+
+// En caso de usar la tecla de borrado pasar al valor anterior //
 
 const verifyDelete = (e) => {
     if(e.keyCode !== 8)

@@ -1,0 +1,33 @@
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 10%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    overflow: auto;
+    background-color: var(--wrong-color);
+    padding: 1rem;
+    justify-content: center;
+    animation-name: animatetop;
+    animation-duration: 0.5s;
+    min-width: fit-content;
+}
+
+.encabezado-modal{
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+@keyframes animatetop{
+    from {top: -100px; opacity: 0}
+    to {top: 10%; opacity: 1}
+}
+
+@media only screen and (min-width: 768px){
+    .modal{
+        max-width: 25%;
+        border-radius: 10px;
+    }
+}
