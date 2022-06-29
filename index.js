@@ -130,6 +130,9 @@ const validateInputValue = (e) => {
 const createBoard = async () => {
     word = await getPalabra();
     wordLength = word.length;
+    if(wordLength > 5)
+        tries++;
+    
     let form = document.getElementById("word-form");
     for (let i = 0; i < tries; i++) {
         let row = document.createElement("fieldset");
