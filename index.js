@@ -159,30 +159,12 @@ const createInputs = (row) => {
 
 const getPalabra = async () => {
     const url = "https://palabras-aleatorias-public-api.herokuapp.com/random";
-    let response = JSON.parse(await makeRequest("GET", url));
+    let response = await makeRequest("GET", url);
     return response.body.Word;
 }
 
-const makeRequest = (method, url) => {
-    return new Promise(function (resolve, reject) {
-        let xhr = new XMLHttpRequest();
-        xhr.open(method, url);
-        xhr.onload = function () {
-            if (this.status >= 200 && this.status < 300) {
-                resolve(xhr.response);
-            } else {
-                reject({
-                    status: this.status,
-                    statusText: xhr.statusText
-                });
-            }
-        };
-        xhr.onerror = function () {
-            reject({
-                status: this.status,
-                statusText: xhr.statusText
-            });
-        };
-        xhr.send();
-    });
+const makeRequest = async (method, url) => {
+    return await fetch(url, { method: method})
+        .then(response => response.json())
+        .catch(error => console.log(error));
 }
