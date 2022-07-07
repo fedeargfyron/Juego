@@ -2,17 +2,17 @@
     --success-color: #6aaa64;
     --neutral-color: #c9b458;
     --wrong-color: #4f4f4f;
-    --default-color: #808080;
+    --default-color: #505050;
     --defeat-color: #ff6b6b;
 }
-
+ 
 body{
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgb(18 18 19);
 }
-
+ 
 input{
     width: 65px;
     height: 65px;
@@ -22,11 +22,15 @@ input{
     text-align: center;
     text-transform: uppercase;
     font-weight: bolder;
+    caret-color: transparent;
+    background-color: rgb(189, 189, 189);
 }
-
+ 
 input:focus{
     outline: none;
+    background-color: rgb(255, 255, 255);
 }
+
 
 input:disabled{
     background: var(--default-color);
