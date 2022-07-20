@@ -1,0 +1,18 @@
+:root{
+    --success-color: #6aaa64;
+    --success-color-hover: #70be69;
+    --neutral-color: #c9b458;
+    --wrong-color: #4f4f4f;
+    --default-color: #505050;
+    --defeat-color: #ff6b6b;
+}
+ 
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgb(18 18 19);
+    color: white;
+}
+
