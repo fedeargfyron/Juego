@@ -1,14 +1,36 @@
 input{
+    text-transform: uppercase;
+    font-size: 2rem;
+    caret-color: transparent;
+    background-color: rgb(189, 189, 189);
+    text-align: center;
+}
+
+.modal-name{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-color);
+}
+
+.modal-name input{
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.row input{
     width: 65px;
     height: 65px;
     border: 2px solid var(--default-color);
     margin: .25rem;
-    font-size: 2rem;
-    text-align: center;
-    text-transform: uppercase;
     font-weight: bolder;
-    caret-color: transparent;
-    background-color: rgb(189, 189, 189);
 }
  
 input:focus{
@@ -17,7 +39,7 @@ input:focus{
 }
 
 
-input:disabled{
+.row input:disabled{
     background: var(--default-color);
 }
 

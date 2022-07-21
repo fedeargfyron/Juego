@@ -1,27 +1,11 @@
-h1{
-    font-size: 3.25rem;
-    
-}
 
-button{
-    margin-top: 5rem;
-    padding: 1rem 3rem;
-    font-size: 1.75rem;
-    background: var(--success-color);
-    color: white;
-    border: none;
-    border-radius: 10px;
-}
-
-button:hover{
-    cursor: pointer;
-    background: var(--success-color-hover);
-    transform: scale(1.1);
-    transition: all .25s ease-out;
-}
 
 .bounce{
     animation: bounceAnimation 3s infinite ease-in-out;
+}
+
+.btn-container{
+    text-align: center;
 }
 
 @keyframes bounceAnimation {

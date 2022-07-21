@@ -5,14 +5,38 @@
     --wrong-color: #4f4f4f;
     --default-color: #505050;
     --defeat-color: #ff6b6b;
+    --background-color: rgb(18 18 19);
 }
- 
+
 body{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: rgb(18 18 19);
+    background-color: var(--background-color);
     color: white;
 }
 
+h1{
+    font-size: 3.25rem;
+}
+
+button{
+    margin-top: 5rem;
+    padding: 1rem;
+    font-size: 1.75rem;
+    background: var(--success-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin: 1rem;
+    max-width: 400px;
+    width: 100%;
+}
+
+button:hover{
+    cursor: pointer;
+    background: var(--neutral-color);
+    transform: scale(1.1);
+    transition: all .25s ease-out;
+}
