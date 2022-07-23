@@ -21,8 +21,8 @@ input{
 }
 
 .modal-name input{
-    padding: 1rem;
-    margin: 1rem;
+    padding: 1rem 0;
+    margin: 1rem 1rem .25rem;
 }
 
 .row input{
@@ -68,6 +68,17 @@ input:focus{
 
 .bounce{
     animation: bounceAnimation .25s;
+}
+
+.invisible{
+    display: none !important;
+}
+
+#cronometro{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 2rem;
 }
 
 @keyframes bounceAnimation {

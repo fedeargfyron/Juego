@@ -5,15 +5,21 @@ let values = [
 let word;
 let wordLength;
 let tries = 5;
- 
+let interval;
+let seconds = '00',
+    minutes = '00',
+    hours = '00';
+
 onload = async () => {
     await createBoard();
-    let inputs = document.querySelectorAll("input");
+    let inputs = document.getElementById("word-form").querySelectorAll("input");
     inputs.forEach(x => {
         x.addEventListener("keyup", validateInputValue);
         x.addEventListener("keypress", confirmRow);
         x.addEventListener("keydown", verifyDelete);
     });
+
+    document.getElementById("modal-form").addEventListener("submit", validarNombre)
 }
 
 const endGame = (win) => {
@@ -26,10 +32,43 @@ const endGame = (win) => {
     }
    
     modal.style.display = "flex";
+    clearInterval(interval);
 }
- 
+
+const cronometro = () => {
+    seconds ++
+
+    if (seconds < 10) seconds = `0${seconds}`
+
+    if (seconds > 59) {
+      seconds = '00'
+      minutes ++
+
+      if (minutes < 10) minutes = `0${minutes}`
+    }
+
+    if (minutes > 59) {
+      minutes = '00'
+      hours ++
+      
+      if (hours < 10) hours = `0${hours}`
+    }
+
+    document.getElementById("cronometro").innerHTML = `${hours}:${minutes}:${seconds}`
+}
+
+const validarNombre = (e) => {
+    e.preventDefault();
+    let inputName = document.getElementById("nameInput");
+    localStorage.setItem("Name", inputName);
+
+    document.getElementById("modal-name").classList.add("invisible");
+    document.getElementById("cronometro").classList.remove("invisible");
+    interval = setInterval(cronometro, 1000);
+}
+
 // Verificar valores de los inputs //
- 
+
 const previousInputsResults = (previousInputs, newValues) => {
     let wordArr = Array.from(word.toLowerCase());
     let includesArr = [];
