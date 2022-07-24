@@ -1,17 +1,25 @@
-let values = [
+let d = new Date();
+let date = `${d.getDate()}-${(d.getMonth()+1)}-${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
+let game = {
+    user: localStorage.getItem("Name"),
+    values: [],
+    word: "",
+    wordLength: 0,
+    tries: 5,
+    sec: '00',
+    min: '00',
+    hour: '00',
+    completed: false,
+    win: false,
+    date: date,
+    id: null
+}
 
-];
-
-let word;
-let wordLength;
-let tries = 5;
 let interval;
-let seconds = '00',
-    minutes = '00',
-    hours = '00';
 
 onload = async () => {
     await createBoard();
+    
     let inputs = document.getElementById("word-form").querySelectorAll("input");
     inputs.forEach(x => {
         x.addEventListener("keyup", validateInputValue);
@@ -19,14 +27,27 @@ onload = async () => {
         x.addEventListener("keydown", verifyDelete);
     });
 
-    document.getElementById("modal-form").addEventListener("submit", validarNombre)
-    document.getElementById("guardarBtn").addEventListener("click", saveGame)
+    document.getElementById("modal-form").addEventListener("submit", validarNombre);
+    document.getElementById("guardarBtn").addEventListener("click", saveGame);
+
+    document.getElementById("cronometro").innerHTML = `${game.hour}:${game.min}:${game.sec}`;
+}
+
+const startTimer = (cronometrar) => {
+    document.getElementById("modal-name").classList.add("invisible");
+    document.getElementById("cronometro").classList.remove("invisible");
+    interval = setInterval(cronometrar, 1000);
+}
+
+const loadGame = (loadedGame) => {
+    startTimer(cronometro);
+    game = JSON.parse(localStorage.getItem("games")).filter(x => x.id == loadedGame)[0];
 }
 
 const endGame = (win) => {
     let modal = document.getElementById('modal');
     let header = document.getElementById('encabezado-modal');
-    document.getElementById("palabra").innerHTML = `Palabra: ${word}`
+    document.getElementById("palabra").innerHTML = `Palabra: ${game.word}`
     if(win){
         header.innerHTML = "Ganaste!";
         modal.classList.add("win");
@@ -37,44 +58,38 @@ const endGame = (win) => {
 }
 
 const saveGame = () => {
-    var d = new Date();
-    var datestring = `${d.getDate()}-${(d.getMonth()+1)}-${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
     let games = JSON.parse(localStorage.getItem("games") || "[]");
-    let game = {
-        user: localStorage.getItem("Name"),
-        board: values,
-        timer: document.getElementById("cronometro").innerHTML,
-        word: word,
-        id: games.length + 1,
-        completed: false,
-        win: false,
-        date: datestring
+    if(game.id){
+        games = games.map(x => x.id == game.id ? game : x);
     }
-    games.push(game);
+    else{
+        game.id = games.length + 1;
+        games.push(game);
+    }
     localStorage.setItem("games", JSON.stringify(games));
     window.location = "index.html";
 }
 
 const cronometro = () => {
-    seconds ++
+    game.sec ++
 
-    if (seconds < 10) seconds = `0${seconds}`
+    if (game.sec < 10) game.sec = `0${game.sec}`
 
-    if (seconds > 59) {
-      seconds = '00'
-      minutes ++
+    if (game.sec > 59) {
+        game.sec = '00'
+        game.min ++
 
-      if (minutes < 10) minutes = `0${minutes}`
+        if (game.min < 10) game.min = `0${game.min}`
     }
 
-    if (minutes > 59) {
-      minutes = '00'
-      hours ++
+    if (game.min > 59) {
+        game.min = '00'
+        game.hour ++
       
-      if (hours < 10) hours = `0${hours}`
+        if (game.hour < 10) game.hour = `0${game.hour}`
     }
 
-    document.getElementById("cronometro").innerHTML = `${hours}:${minutes}:${seconds}`
+    document.getElementById("cronometro").innerHTML = `${game.hour}:${game.min}:${game.sec}`
 }
 
 const validarNombre = (e) => {
@@ -82,15 +97,13 @@ const validarNombre = (e) => {
     let inputName = document.getElementById("nameInput");
     localStorage.setItem("Name", inputName.value);
 
-    document.getElementById("modal-name").classList.add("invisible");
-    document.getElementById("cronometro").classList.remove("invisible");
-    interval = setInterval(cronometro, 1000);
+    startTimer(cronometro);
 }
 
 // Verificar valores de los inputs //
 
 const previousInputsResults = (previousInputs, newValues) => {
-    let wordArr = Array.from(word.toLowerCase());
+    let wordArr = Array.from(game.word.toLowerCase());
     let includesArr = [];
     let correctArr = [];
     previousInputs.forEach((x, index) => {
@@ -135,23 +148,23 @@ const previousInputsResults = (previousInputs, newValues) => {
         input.classList.add("wrong-input");
     })
  
-    if(correctInputs === wordLength){
+    if(correctInputs === game.wordLength){
         return endGame(true);
     }
  
-    tries--;
-    if(tries === 0){
+    game.tries--;
+    if(game.tries === 0){
         return endGame();
     }
  
-    values.push(newValues);
+    game.values.push(newValues);
     nextRowHandler();
 }
  
 // Habilitar nueva fila //
  
 const nextRowHandler = () => {
-    let row = document.getElementById(`row${values.length}`);
+    let row = document.getElementById(`row${game.values.length}`);
     let inputs = [...row.getElementsByTagName("input")];
     inputs.forEach(x => x.disabled = false);
     inputs[0].focus();
@@ -163,7 +176,7 @@ const confirmRow = (e) => {
     if(e.key !== "Enter")
         return;
  
-    let row = document.getElementById(`row${values.length}`);
+    let row = document.getElementById(`row${game.values.length}`);
     let inputs = [...row.getElementsByTagName("input")];
     let newValues = inputs.map(x => x.value);
     if(newValues.some(x => !x)){
@@ -215,13 +228,16 @@ const validateInputValue = (e) => {
 // Creación de tablero //
 
 const createBoard = async () => {
-    word = await getPalabra();
-    wordLength = word.length;
-    if(wordLength > 5)
-        tries++;
+    let loadedGame = localStorage.getItem("loadedGame");
+    if(loadedGame){
+        loadGame(loadedGame);
+    }
+    else{
+        await getPalabra();
+    }
     
     let form = document.getElementById("word-form");
-    for (let i = 0; i < tries; i++) {
+    for (let i = 0; i < game.tries; i++) {
         let row = document.createElement("fieldset");
         row.classList.add('row');
         row.id = `row${i}`;
@@ -230,10 +246,14 @@ const createBoard = async () => {
     }
 
     document.getElementsByTagName("input")[0].focus();
+
+    if(loadedGame){
+
+    }
 }
 
 const createInputs = (row) => {
-    for (let i = 0; i < wordLength; i++) {
+    for (let i = 0; i < game.wordLength; i++) {
         let input = document.createElement("input");
         input.maxLength = 1;
         if(row.id !== "row0"){
@@ -245,8 +265,9 @@ const createInputs = (row) => {
 }
 
 const getPalabra = async () => {
-    let item = localStorage.getItem("games");
-    return "Hola";
+    game.word = "Hola";
+    game.wordLength = game.word.length;
+    return;
     const url = "https://palabras-aleatorias-public-api.herokuapp.com/random";
     let response = await makeRequest("GET", url);
     return response.body.Word;

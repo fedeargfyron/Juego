@@ -1,8 +1,15 @@
 onload = () => {
-    document.getElementById("newGameBtn").addEventListener("click", () => window.location = "game.html")
-    document.getElementById("loadGameBtn").addEventListener("click", loadGames)
+    document.getElementById("newGameBtn").addEventListener("click", newGame)
+    document.getElementById("loadGameBtn").addEventListener("click", loadGame)
 }
 
-const loadGames = () => {
+const newGame = () => {
+    localStorage.removeItem("loadedGame");
+    window.location = "game.html";
+}
+
+const loadGame = () => {
+    localStorage.setItem("loadedGame", 3);
+    window.location = "game.html";
     //Id, Jugador, Fecha, Tiempo
 }
