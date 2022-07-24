@@ -20,6 +20,7 @@ onload = async () => {
     });
 
     document.getElementById("modal-form").addEventListener("submit", validarNombre)
+    document.getElementById("guardarBtn").addEventListener("click", saveGame)
 }
 
 const endGame = (win) => {
@@ -33,6 +34,25 @@ const endGame = (win) => {
    
     modal.style.display = "flex";
     clearInterval(interval);
+}
+
+const saveGame = () => {
+    var d = new Date();
+    var datestring = `${d.getDate()}-${(d.getMonth()+1)}-${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
+    let games = JSON.parse(localStorage.getItem("games") || "[]");
+    let game = {
+        user: localStorage.getItem("Name"),
+        board: values,
+        timer: document.getElementById("cronometro").innerHTML,
+        word: word,
+        id: games.length + 1,
+        completed: false,
+        win: false,
+        date: datestring
+    }
+    games.push(game);
+    localStorage.setItem("games", JSON.stringify(games));
+    window.location = "index.html";
 }
 
 const cronometro = () => {
@@ -60,7 +80,7 @@ const cronometro = () => {
 const validarNombre = (e) => {
     e.preventDefault();
     let inputName = document.getElementById("nameInput");
-    localStorage.setItem("Name", inputName);
+    localStorage.setItem("Name", inputName.value);
 
     document.getElementById("modal-name").classList.add("invisible");
     document.getElementById("cronometro").classList.remove("invisible");
@@ -225,6 +245,8 @@ const createInputs = (row) => {
 }
 
 const getPalabra = async () => {
+    let item = localStorage.getItem("games");
+    return "Hola";
     const url = "https://palabras-aleatorias-public-api.herokuapp.com/random";
     let response = await makeRequest("GET", url);
     return response.body.Word;

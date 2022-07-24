@@ -76,9 +76,10 @@ input:focus{
 
 #cronometro{
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 25px;
+    right: 25px;
     font-size: 2rem;
+    z-index: 100;
 }
 
 @keyframes bounceAnimation {
