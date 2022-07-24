@@ -31,6 +31,7 @@ onload = async () => {
     document.getElementById("guardarBtn").addEventListener("click", saveGame);
 
     document.getElementById("cronometro").innerHTML = `${game.hour}:${game.min}:${game.sec}`;
+    console.log(game);
 }
 
 const startTimer = (cronometrar) => {
@@ -42,6 +43,25 @@ const startTimer = (cronometrar) => {
 const loadGame = (loadedGame) => {
     startTimer(cronometro);
     game = JSON.parse(localStorage.getItem("games")).filter(x => x.id == loadedGame)[0];
+    game.tries = 5;
+}
+
+const fillValuesFromGame = () => {
+    for (let i = 0; i < game.values.length; i++) {
+        let row = document.getElementById(`row${i}`);
+        let inputs = [...row.getElementsByTagName("input")];
+        
+        inputs.forEach((x, index) => {
+            x.value = game.values[i][index];
+        });
+        paintInputs(inputs);
+        game.tries--;
+    }
+
+    if(game.tries === 0){
+        return endGame(game.win);
+    }
+    nextRowHandler();
 }
 
 const endGame = (win) => {
@@ -53,6 +73,8 @@ const endGame = (win) => {
         modal.classList.add("win");
     }
    
+    game.completed = true;
+    game.win = win;
     modal.style.display = "flex";
     clearInterval(interval);
 }
@@ -98,15 +120,16 @@ const validarNombre = (e) => {
     localStorage.setItem("Name", inputName.value);
 
     startTimer(cronometro);
+    document.getElementById("word-form").getElementsByTagName("input")[0].focus();
 }
 
 // Verificar valores de los inputs //
 
-const previousInputsResults = (previousInputs, newValues) => {
+const paintInputs = (inputs) => {
     let wordArr = Array.from(game.word.toLowerCase());
     let includesArr = [];
     let correctArr = [];
-    previousInputs.forEach((x, index) => {
+    inputs.forEach((x, index) => {
         if(!wordArr.includes(x.value)){
             return;
         }
@@ -126,7 +149,7 @@ const previousInputsResults = (previousInputs, newValues) => {
     })
  
     let correctInputs = 0;
-    previousInputs.forEach((input, i) => {
+    inputs.forEach((input, i) => {
         input.classList.add("done");
         input.style.animationDelay = `${150 * (i)}ms`;
         let value = input.value.toLowerCase();
@@ -147,7 +170,13 @@ const previousInputsResults = (previousInputs, newValues) => {
  
         input.classList.add("wrong-input");
     })
- 
+    return correctInputs;
+}
+
+const previousInputsResults = (previousInputs, newValues) => {
+    let correctInputs = paintInputs(previousInputs);
+    game.values.push(newValues);
+
     if(correctInputs === game.wordLength){
         return endGame(true);
     }
@@ -157,7 +186,6 @@ const previousInputsResults = (previousInputs, newValues) => {
         return endGame();
     }
  
-    game.values.push(newValues);
     nextRowHandler();
 }
  
@@ -244,11 +272,8 @@ const createBoard = async () => {
         createInputs(row)
         form.appendChild(row);
     }
-
-    document.getElementsByTagName("input")[0].focus();
-
     if(loadedGame){
-
+        fillValuesFromGame();
     }
 }
 
@@ -267,10 +292,12 @@ const createInputs = (row) => {
 const getPalabra = async () => {
     game.word = "Hola";
     game.wordLength = game.word.length;
-    return;
+    /*
     const url = "https://palabras-aleatorias-public-api.herokuapp.com/random";
     let response = await makeRequest("GET", url);
-    return response.body.Word;
+    game.word = response.body.Word;
+    game.wordLength = game.word.length;
+    */
 }
 
 const makeRequest = async (method, url) => {
