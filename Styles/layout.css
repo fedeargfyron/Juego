@@ -6,6 +6,7 @@
     --default-color: #505050;
     --defeat-color: #ff6b6b;
     --background-color: rgb(18 18 19);
+    --background-color-lighter: rgb(28, 28, 28);
 }
 
 body{

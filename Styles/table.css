@@ -36,3 +36,29 @@ table tr:hover{
     transition: all 0.25s ease-out;
     filter: brightness(0.75);
 }
+
+.fa-solid{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+}
+
+.fa-solid:hover{
+    cursor: pointer;
+}
+
+.modal-content{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    position: relative;
+    padding: 2rem;
+    background-color: var(--background-color-lighter);
+    border-radius: 4px;
+}
+
+.modal-content h1{
+    margin-bottom: 1rem;
+}

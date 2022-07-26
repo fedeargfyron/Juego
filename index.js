@@ -1,6 +1,12 @@
 onload = () => {
-    document.getElementById("newGameBtn").addEventListener("click", newGame)
-    document.getElementById("loadGameBtn").addEventListener("click", loadGamesTable)
+    document.getElementById("newGameBtn").addEventListener("click", newGame);
+    document.getElementById("loadGameBtn").addEventListener("click", loadGamesTable);
+    document.getElementById("modal-exit").addEventListener("click", exitModal);
+    
+}
+
+const exitModal = () => {
+    document.getElementById("load-modal").classList.add("invisible");
 }
 
 const newGame = () => {

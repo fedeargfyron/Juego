@@ -31,7 +31,6 @@ onload = async () => {
     document.getElementById("guardarBtn").addEventListener("click", saveGame);
 
     document.getElementById("cronometro").innerHTML = `${game.hour}:${game.min}:${game.sec}`;
-    console.log(game);
 }
 
 const startTimer = (cronometrar) => {
