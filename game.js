@@ -202,7 +202,7 @@ const nextRowHandler = () => {
 const confirmRow = (e) => {
     if(e.key !== "Enter")
         return;
- 
+
     let row = document.getElementById(`row${game.values.length}`);
     let inputs = [...row.getElementsByTagName("input")];
     let newValues = inputs.map(x => x.value);

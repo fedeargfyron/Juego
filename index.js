@@ -2,7 +2,7 @@ onload = () => {
     document.getElementById("newGameBtn").addEventListener("click", newGame);
     document.getElementById("loadGameBtn").addEventListener("click", loadGamesTable);
     document.getElementById("modal-exit").addEventListener("click", exitModal);
-    
+    document.getElementById("contactBtn").addEventListener("click", () => window.location = 'contact.html');
 }
 
 const exitModal = () => {

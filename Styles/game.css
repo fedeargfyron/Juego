@@ -1,11 +1,3 @@
-input{
-    text-transform: uppercase;
-    font-size: 2rem;
-    caret-color: transparent;
-    background-color: rgb(189, 189, 189);
-    text-align: center;
-}
-
 .modal-name{
     position: fixed;
     display: flex;
@@ -32,12 +24,6 @@ input{
     margin: .25rem;
     font-weight: bolder;
 }
- 
-input:focus{
-    outline: none;
-    background-color: rgb(255, 255, 255);
-}
-
 
 .row input:disabled{
     background: var(--default-color);

@@ -9,6 +9,11 @@
     --background-color-lighter: rgb(28, 28, 28);
 }
 
+::placeholder {
+    color: black;
+    opacity: 1;
+}
+
 body{
     display: flex;
     align-items: center;
@@ -33,6 +38,21 @@ button{
     margin: 1rem;
     max-width: 400px;
     width: 100%;
+}
+
+input, 
+textarea{
+    text-transform: uppercase;
+    font-size: 2rem;
+    caret-color: transparent;
+    background-color: rgb(189, 189, 189);
+    text-align: center;
+}
+
+input:focus,
+textarea:focus{
+    outline: none;
+    background-color: rgb(255, 255, 255);
 }
 
 button:hover{
