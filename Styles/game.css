@@ -70,10 +70,6 @@ input:focus{
     animation: bounceAnimation .25s;
 }
 
-.invisible{
-    display: none !important;
-}
-
 #cronometro{
     position: absolute;
     top: 25px;

@@ -1,0 +1,38 @@
+table {
+    border-radius: 5px;
+    font-size: 1.25rem;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: rgb(23, 23, 23);
+}
+
+table td, table th {
+    text-align: center;
+    padding: 1.25rem;
+}
+
+table td, table th {
+    border-right: 1px solid var(--main-color-hover);
+}
+
+table td:last-child, 
+table th:last-child{
+    border-right: none;
+}
+
+table th {
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background: #313131;
+}
+
+table tr:hover{
+    cursor: pointer;
+    transition: all 0.25s ease-out;
+    filter: brightness(0.75);
+}
