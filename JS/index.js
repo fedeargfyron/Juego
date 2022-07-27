@@ -7,8 +7,19 @@ let sortFunctions = {
         var y = b.user.toLowerCase();
         return x < y ? -1 : x > y ? 1 : 0;
     },
-    score: (a, b) => a.score - b.score,
-    date: (a, b) => a.date - b.date,
+    score: (a, b) => b.score - a.score,
+    date: (a, b) => {
+        let x = a.date.split(' ');
+        let split1A = x[0].split('-');
+        let split2A = x[1].split(':');
+        let dateA = new Date(split1A[2], split1A[1], split1A[0], split2A[0], split2A[1], '00');
+
+        let y = b.date.split(' ');
+        let split1B = y[0].split('-');
+        let split2B = y[1].split(':');
+        let dateB = new Date(split1B[2], split1B[1], split1B[0], split2B[0], split2B[1], '00');
+        return dateB - dateA;
+    },
     time: (a, b) => {
         let now = new Date();
         let x = new Date(now.getFullYear(), now.getMonth(), now.getDate(), a.hour, a.min, a.sec);
