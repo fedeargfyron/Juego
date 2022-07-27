@@ -12,7 +12,8 @@ let game = {
     completed: false,
     win: false,
     date: date,
-    id: null
+    id: null,
+    score: 0
 }
 
 let interval;
@@ -70,8 +71,8 @@ const endGame = (win) => {
     if(win){
         header.innerHTML = "Ganaste!";
         modal.classList.add("win");
+        game.score = Math.max(10000 * (6 - game.values.length) - ((game.hour * 60 * 60) + (game.min * 60) + game.sec) * 5, 0);
     }
-   
     game.completed = true;
     game.win = win;
     modal.style.display = "flex";
