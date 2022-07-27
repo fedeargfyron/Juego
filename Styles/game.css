@@ -18,8 +18,9 @@
 }
 
 .row input{
-    width: 65px;
-    height: 65px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
     border: 2px solid var(--default-color);
     margin: .25rem;
     font-weight: bolder;
@@ -72,4 +73,12 @@
 @keyframes resultAnimation {
     50% {transform: scaleY(0);}
     100%{transform: rotateX(1);}
+}
+
+@media only screen and (min-width: 768px){
+    .row input{
+        width: 65px;
+        height: 65px;
+        font-size: 2rem;
+    }
 }
