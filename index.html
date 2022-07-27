@@ -13,17 +13,28 @@
     <title>Inicio</title>
 </head>
 <body>
-    <h1 class="bounce">A R R O N D L E</h1>
-    <div class="btn-container">
-        <button id="newGameBtn">Juego nuevo</button>
-        <button id="loadGameBtn">Cargar partida</button>
-        <button id="contactBtn">Contacto</button>
-        <button id="projectBtn">Proyecto</button>
+    <main>
+        <i id="trophyIcon" class="fa-solid fa-trophy trophy-icon"></i>
+        <h1 class="bounce">A R R O N D L E</h1>
+        <div class="btn-container">
+            <button id="newGameBtn">Juego nuevo</button>
+            <button id="loadGameBtn">Cargar partida</button>
+            <button id="contactBtn">Contacto</button>
+            <button id="projectBtn">Proyecto</button>
+        </div>
+    </main>
+    <div id="scores-modal" class="scores-modal invisible">
+        <div class="modal-content">
+            <h1>PARTIDAS</h1>
+            <i id="scores-exit" class="fa-solid fa-xmark exit-icon"></i>
+            <table id="scores-table">
+            </table>
+        </div>
     </div>
     <div id="load-modal" class="load-modal invisible">
         <div class="modal-content">
             <h1>CARGAR PARTIDA</h1>
-            <i id="modal-exit" class="fa-solid fa-xmark"></i>
+            <i id="modal-exit" class="fa-solid fa-xmark exit-icon"></i>
             <table id="loadGames-table">
             </table>
         </div>

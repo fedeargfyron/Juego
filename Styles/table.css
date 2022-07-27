@@ -31,20 +31,20 @@ table tr:nth-child(even) {
     background: #313131;
 }
 
-table tr:hover{
+table tr:not(:first-child):hover {
     cursor: pointer;
     transition: all 0.25s ease-out;
     filter: brightness(0.75);
 }
 
-.fa-solid{
+.exit-icon{
     position: absolute;
     top: 10px;
     right: 10px;
     font-size: 1.5rem;
 }
 
-.fa-solid:hover{
+.exit-icon:hover{
     cursor: pointer;
 }
 
@@ -61,4 +61,14 @@ table tr:hover{
 
 .modal-content h1{
     margin-bottom: 1rem;
+}
+
+.win{
+    background: var(--success-color) !important;
+    border-bottom: 1px solid var(--background-color-lighter);
+}
+
+.lose{
+    background: var(--defeat-color) !important;
+    border-bottom: 1px solid var(--background-color-lighter);
 }
