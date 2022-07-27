@@ -150,6 +150,7 @@ const paintInputs = (inputs) => {
     let correctInputs = 0;
     inputs.forEach((input, i) => {
         input.classList.add("done");
+        input.disabled = true;
         input.style.animationDelay = `${150 * (i)}ms`;
         let value = input.value.toLowerCase();
         if(wordArr[i] == value){
