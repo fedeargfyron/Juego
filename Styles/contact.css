@@ -1,8 +1,8 @@
 input, textarea{
     padding: 1rem 0;
     margin: 1rem 0;
-    min-width: 500px;
     max-width: 100%;
+    width: 100%;
 }
 
 textarea{
@@ -27,7 +27,7 @@ textarea{
     text-align: start;
     font-size: 1.5rem;
     max-width: 100%;
-    
+    width: 100%;
 }
 
 .fa-arrow-left{

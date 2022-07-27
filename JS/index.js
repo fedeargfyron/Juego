@@ -3,6 +3,7 @@ onload = () => {
     document.getElementById("loadGameBtn").addEventListener("click", loadGamesTable);
     document.getElementById("modal-exit").addEventListener("click", exitModal);
     document.getElementById("contactBtn").addEventListener("click", () => window.location = 'contact.html');
+    document.getElementById("projectBtn").addEventListener("click", () => window.open('https://fedeargfyron.github.io/Juego/', '_blank').focus());
 }
 
 const exitModal = () => {
