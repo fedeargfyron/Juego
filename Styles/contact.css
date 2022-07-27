@@ -1,3 +1,14 @@
+input, textarea{
+    padding: 1rem 0;
+    margin: 1rem 0;
+    min-width: 500px;
+    max-width: 100%;
+}
+
+textarea{
+    resize: none;
+}
+
 .contact-main,
 .contact-form{
     display: flex;
@@ -5,14 +16,18 @@
     justify-content: center;
     text-align: center;
     align-items: center;
+    max-width: 500px;
 }
 
-input, textarea{
-    padding: 1rem 0;
-    margin: 1rem 1rem .25rem;
-    min-width: 550px;
+.input-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: start;
+    font-size: 1.5rem;
+    max-width: 100%;
 }
 
-textarea{
-    resize: none;
+label{
+    color: var(--defeat-color);
 }

@@ -15,13 +15,16 @@
         <h1>Contacto</h1>
         <form id="contact-form" class="contact-form">
             <div class="input-container">
-                <input id="nombre" placeholder="Nombre" />
+                <input id="nombre" class="field" placeholder="Nombre" />
+                <label class="invisible" id="lblnombre" for="nombre"/>
             </div>
             <div class="input-container">
-                <input id="email" placeholder="Email" />
+                <input id="email" class="field" placeholder="Email" />
+                <label class="invisible" id="lblemail" for="email"/>
             </div>
             <div class="input-container">
-                <textarea id="comentario" placeholder="Comentarios"></textarea>
+                <textarea id="comentarios" class="field" placeholder="Comentarios"></textarea>
+                <label class="invisible" id="lblcomentarios" for="comentarios"/>
             </div>
             <button id="submitBtn" type="submit">Enviar</button>
         </form>
