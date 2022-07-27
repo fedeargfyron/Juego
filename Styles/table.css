@@ -72,3 +72,9 @@ table tr:not(:first-child):hover {
     background: var(--defeat-color) !important;
     border-bottom: 1px solid var(--background-color-lighter);
 }
+
+.scores-modal table th:hover{
+    cursor: pointer;
+    background-color: var(--background-color-lighter);
+    transition: all 0.25s ease-out;
+}
