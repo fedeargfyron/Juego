@@ -289,7 +289,7 @@ const createInputs = (row) => {
 }
 
 const getPalabra = async () => {
-    let url = "../Data/words.json";
+    let url = "./Data/words.json";
     let words = await makeRequest("GET", url);
     var word = words[Math.floor(Math.random() * words.length)];
     game.word = word;
