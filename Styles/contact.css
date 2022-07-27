@@ -17,6 +17,7 @@ textarea{
     text-align: center;
     align-items: center;
     max-width: 500px;
+    position: relative;
 }
 
 .input-container{
@@ -26,6 +27,20 @@ textarea{
     text-align: start;
     font-size: 1.5rem;
     max-width: 100%;
+    
+}
+
+.fa-arrow-left{
+    font-size: 1.75rem;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+}
+
+.fa-arrow-left:hover{
+    cursor: pointer;
+    color: var(--default-color);
+    transition: all 0.2s ease-in-out;
 }
 
 label{

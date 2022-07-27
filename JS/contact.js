@@ -8,6 +8,7 @@ onload = () => {
     document.getElementById("contact-form").addEventListener("submit", sendContact);
     let inputs = [...document.getElementsByClassName("field")];
     inputs.forEach(x => x.addEventListener("focus", removeLabel));
+    document.getElementById("arrow-exit").addEventListener("click", () => window.location = "index.html");
 }
 
 const removeLabel = (e) => {

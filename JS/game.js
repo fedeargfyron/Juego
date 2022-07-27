@@ -289,14 +289,11 @@ const createInputs = (row) => {
 }
 
 const getPalabra = async () => {
-    game.word = "Hola";
-    game.wordLength = game.word.length;
-    /*
-    const url = "https://palabras-aleatorias-public-api.herokuapp.com/random";
-    let response = await makeRequest("GET", url);
-    game.word = response.body.Word;
-    game.wordLength = game.word.length;
-    */
+    let url = "../Data/words.json";
+    let words = await makeRequest("GET", url);
+    var word = words[Math.floor(Math.random() * words.length)];
+    game.word = word;
+    game.wordLength = word.length;
 }
 
 const makeRequest = async (method, url) => {
