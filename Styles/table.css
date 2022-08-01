@@ -4,9 +4,11 @@ table {
     font-weight: normal;
     border: none;
     border-collapse: collapse;
+    overflow-x: scroll;
     max-width: 100%;
     white-space: nowrap;
     background-color: rgb(23, 23, 23);
+    display: block;
 }
 
 table td, table th {
@@ -55,6 +57,7 @@ table tr:not(:first-child):hover {
     align-items: center;
     position: relative;
     padding: 2rem;
+    max-width: 100%;
     background-color: var(--background-color-lighter);
     border-radius: 4px;
 }

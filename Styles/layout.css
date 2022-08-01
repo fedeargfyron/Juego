@@ -14,6 +14,18 @@
     opacity: 1;
 }
 
+::-webkit-scrollbar {
+    width: 20px;
+  }
+
+::-webkit-scrollbar-track {
+    background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--default-color);
+  }
+
 body{
     display: flex;
     align-items: center;
@@ -23,10 +35,11 @@ body{
     background-color: var(--background-color);
     color: white;
     margin: 0 1rem;
+    max-width: 100vw;
 }
 
 h1{
-    font-size: 2.75rem;
+    font-size: 2.5rem;
     max-width: 100%;
 }
 

@@ -34,10 +34,6 @@ main{
     transition: all 0.2s ease-in-out;
 }
 
-.bounce{
-    animation: bounceAnimation 3s infinite ease-in-out;
-}
-
 @keyframes bounceAnimation {
     50% {transform: scale(1.2);}
     100%{transform: scale(1);}
