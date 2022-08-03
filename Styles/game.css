@@ -68,10 +68,13 @@
 
 #cronometro{
     position: absolute;
-    top: 25px;
-    right: 25px;
+    bottom: 1rem;
     font-size: 2rem;
     z-index: 100;
+    width: fit-content;
+    height: fit-content;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 @keyframes bounceAnimation {
@@ -89,5 +92,10 @@
         width: 65px;
         height: 65px;
         font-size: 2rem;
+    }
+
+    #cronometro{
+        top: 25px;
+        right: 25px;
     }
 }

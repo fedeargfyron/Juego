@@ -34,7 +34,7 @@ onload = () => {
     document.getElementById("modal-exit").addEventListener("click", exitLoadModal);
     document.getElementById("scores-exit").addEventListener("click", exitScoresModal);
     document.getElementById("contactBtn").addEventListener("click", () => window.location = 'contact.html');
-    document.getElementById("projectBtn").addEventListener("click", () => window.open('https://fedeargfyron.github.io/Juego/', '_blank').focus());
+    document.getElementById("projectBtn").addEventListener("click", () => window.open('https://github.com/fedeargfyron/Juego', '_blank').focus());
     document.getElementById("trophyIcon").addEventListener("click", loadScoresTable);
 }
 
