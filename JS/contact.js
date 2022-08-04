@@ -1,14 +1,9 @@
+//Dictionary con las validaciones de campos
+
 const fieldsValidations = {
     "nombre": (value) => !value && 'Debe tener nombre',
     "email": (value) => !value.match(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/) && 'Email invalido',
     "comentarios": (value) => value.length <= 5 && 'La longitud de los comentarios debe ser de 5 caracteres mínimo'
-}
-
-onload = () => {
-    document.getElementById("contact-form").addEventListener("submit", sendContact);
-    let inputs = [...document.getElementsByClassName("field")];
-    inputs.forEach(x => x.addEventListener("focus", removeLabel));
-    document.getElementById("arrow-exit").addEventListener("click", () => window.location = "index.html");
 }
 
 const removeLabel = (e) => {
@@ -35,4 +30,11 @@ const sendContact = (e) => {
         return;
 
     window.open(`mailto:federicoarron15@gmail.com?subject=Consulta de ${nombre}&body=${comentarios}`);
+}
+
+onload = () => {
+    document.getElementById("contact-form").addEventListener("submit", sendContact);
+    let inputs = [...document.getElementsByClassName("field")];
+    inputs.forEach(x => x.addEventListener("focus", removeLabel));
+    document.getElementById("arrow-exit").addEventListener("click", () => window.location = "index.html");
 }

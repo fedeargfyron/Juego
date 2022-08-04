@@ -18,22 +18,6 @@ let game = {
 
 let interval;
 
-onload = async () => {
-    await createBoard();
-    
-    let inputs = document.getElementById("word-form").querySelectorAll("input");
-    inputs.forEach(x => {
-        x.addEventListener("keyup", validateInputValue);
-        x.addEventListener("keypress", confirmRow);
-        x.addEventListener("keydown", verifyDelete);
-    });
-
-    document.getElementById("modal-form").addEventListener("submit", validarNombre);
-    document.getElementById("guardarBtn").addEventListener("click", saveGame);
-
-    document.getElementById("cronometro").innerHTML = `${game.hour}:${game.min}:${game.sec}`;
-}
-
 const startTimer = (cronometrar) => {
     document.getElementById("modal-name").classList.add("invisible");
     document.getElementById("cronometro").classList.remove("invisible");
@@ -45,6 +29,8 @@ const loadGame = (loadedGame) => {
     game = JSON.parse(localStorage.getItem("games")).filter(x => x.id == loadedGame)[0];
     game.tries = 5;
 }
+
+// Cargar valores del juego guardado //
 
 const fillValuesFromGame = () => {
     for (let i = 0; i < game.values.length; i++) {
@@ -64,6 +50,8 @@ const fillValuesFromGame = () => {
     nextRowHandler();
 }
 
+// Forzar terminación del juego y determinar si gano o perdió //
+
 const endGame = (win) => {
     let modal = document.getElementById('modal');
     let header = document.getElementById('encabezado-modal');
@@ -79,6 +67,8 @@ const endGame = (win) => {
     clearInterval(interval);
 }
 
+// Guardardo de partida en LocalStorage //
+
 const saveGame = () => {
     let games = JSON.parse(localStorage.getItem("games") || "[]");
     if(game.id){
@@ -91,6 +81,8 @@ const saveGame = () => {
     localStorage.setItem("games", JSON.stringify(games));
     window.location = "index.html";
 }
+
+// Función que se encarga cambiar valores del cronometro //
 
 const cronometro = () => {
     game.sec ++
@@ -123,7 +115,7 @@ const validarNombre = (e) => {
     document.getElementById("word-form").getElementsByTagName("input")[0].focus();
 }
 
-// Verificar valores de los inputs //
+// Verificar valores de los inputs y pintarlos acorde a ello //
 
 const paintInputs = (inputs) => {
     let wordArr = Array.from(game.word.toLowerCase());
@@ -174,6 +166,9 @@ const paintInputs = (inputs) => {
     return correctInputs;
 }
 
+// Determinar resultados de la fila anterior //
+// Terminar juego en caso de que se quede sin intentos o los inputs sean todos correctos //
+
 const previousInputsResults = (previousInputs, newValues) => {
     let correctInputs = paintInputs(previousInputs);
     game.values.push(newValues);
@@ -216,6 +211,8 @@ const confirmRow = (e) => {
     previousInputsResults(inputs, newValues);
 }
  
+// Intenta enfocar el input pasado como parametro //
+
 const tryFocusInput = (sibling) => {
     if(!sibling)
         return;
@@ -278,6 +275,8 @@ const createBoard = async () => {
     }
 }
 
+// Creación de inputs para la fila //
+
 const createInputs = (row) => {
     for (let i = 0; i < game.wordLength; i++) {
         let input = document.createElement("input");
@@ -290,6 +289,8 @@ const createInputs = (row) => {
     }
 }
 
+// Obtención de palabra aleatoria //
+
 const getPalabra = async () => {
     let url = "./Data/words.json";
     let words = await makeRequest("GET", url);
@@ -297,9 +298,26 @@ const getPalabra = async () => {
     game.word = word;
     game.wordLength = word.length;
 }
+// Request para obtener palabra //
 
 const makeRequest = async (method, url) => {
     return await fetch(url, { method: method})
         .then(response => response.json())
         .catch(error => console.log(error));
+}
+
+onload = async () => {
+    await createBoard();
+    
+    let inputs = document.getElementById("word-form").querySelectorAll("input");
+    inputs.forEach(x => {
+        x.addEventListener("keyup", validateInputValue);
+        x.addEventListener("keypress", confirmRow);
+        x.addEventListener("keydown", verifyDelete);
+    });
+
+    document.getElementById("modal-form").addEventListener("submit", validarNombre);
+    document.getElementById("guardarBtn").addEventListener("click", saveGame);
+
+    document.getElementById("cronometro").innerHTML = `${game.hour}:${game.min}:${game.sec}`;
 }
