@@ -3,7 +3,6 @@ Se desarrollo una aplicación web que es una versión modificada del famoso jueg
 de jugar multiples partidas en un mismo día, guardarlas y cargarlas. 
 
 # Juego
-* El juego es una replica del Wordle. 
 * Las palabras se obtienen al azar de un JSON existente en la aplicación.
 * Para iniciar el juego hay que ingresar un nombre de usuario.
 * Se realizan verificaciones por fila para determinar si los inputs ingresados son correctos.
@@ -27,6 +26,3 @@ https://github.com/fedeargfyron/Juego
 # Pages
 https://fedeargfyron.github.io/Juego/
 
-
-Terminar de ver cronometro
-width formulario

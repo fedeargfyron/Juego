@@ -1,5 +1,23 @@
 let scoredGames;
 
+const sortScoresModal = (e) => {
+    scoredGames.sort((a, b) => sortFunctions[e.target.id](a, b));
+    let table = document.getElementById("scores-table");
+    const header = table.firstChild;
+    table.innerHTML = '';
+    table.appendChild(header);
+    setTableRows(table);
+}
+
+let getFormattedDate = (date) => {
+    let x = date.split(' ');
+    let split1 = x[0].split('-');
+    let split2 = x[1].split(':');
+    return new Date(split1[2], split1[1], split1[0], split2[0], split2[1], '00');
+}
+
+//logica de sortings para la grilla de juegos
+
 let sortFunctions = {
     id: (a, b) => a.id - b.id,
     user: (a, b) => {
@@ -9,15 +27,8 @@ let sortFunctions = {
     },
     score: (a, b) => b.score - a.score,
     date: (a, b) => {
-        let x = a.date.split(' ');
-        let split1A = x[0].split('-');
-        let split2A = x[1].split(':');
-        let dateA = new Date(split1A[2], split1A[1], split1A[0], split2A[0], split2A[1], '00');
-
-        let y = b.date.split(' ');
-        let split1B = y[0].split('-');
-        let split2B = y[1].split(':');
-        let dateB = new Date(split1B[2], split1B[1], split1B[0], split2B[0], split2B[1], '00');
+        let dateA = getFormattedDate(a.date);
+        let dateB = getFormattedDate(b.date);
         return dateB - dateA;
     },
     time: (a, b) => {
@@ -28,15 +39,7 @@ let sortFunctions = {
     }
 }
 
-onload = () => {
-    document.getElementById("newGameBtn").addEventListener("click", newGame);
-    document.getElementById("loadGameBtn").addEventListener("click", loadGamesTable);
-    document.getElementById("modal-exit").addEventListener("click", exitLoadModal);
-    document.getElementById("scores-exit").addEventListener("click", exitScoresModal);
-    document.getElementById("contactBtn").addEventListener("click", () => window.location = 'contact.html');
-    document.getElementById("projectBtn").addEventListener("click", () => window.open('https://github.com/fedeargfyron/Juego', '_blank').focus());
-    document.getElementById("trophyIcon").addEventListener("click", loadScoresTable);
-}
+//Creación de las filas para la tabla de juegos terminados.
 
 const setTableRows = (table) => {
     scoredGames.forEach(x => {
@@ -55,14 +58,7 @@ const setTableRows = (table) => {
     });
 }
 
-const sortScoresModal = (e) => {
-    scoredGames.sort((a, b) => sortFunctions[e.target.id](a, b));
-    let table = document.getElementById("scores-table");
-    const header = table.firstChild;
-    table.innerHTML = '';
-    table.appendChild(header);
-    setTableRows(table);
-}
+//Creación de la tabla de juegos terminados.
 
 const loadScoresTable = () => {
     document.getElementById("scores-modal").classList.remove("invisible");
@@ -82,18 +78,7 @@ const loadScoresTable = () => {
     setTableRows(table);
 }
 
-const exitScoresModal = () => {
-    document.getElementById("scores-modal").classList.add("invisible");
-}
-
-const exitLoadModal = () => {
-    document.getElementById("load-modal").classList.add("invisible");
-}
-
-const newGame = () => {
-    localStorage.removeItem("loadedGame");
-    window.location = "game.html";
-}
+//Creación de la tabla de juegos para cargar.
 
 const loadGamesTable = () => {
     document.getElementById("load-modal").classList.remove("invisible");
@@ -121,8 +106,31 @@ const loadGamesTable = () => {
     });
 }
 
+const exitScoresModal = () => {
+    document.getElementById("scores-modal").classList.add("invisible");
+}
+
+const exitLoadModal = () => {
+    document.getElementById("load-modal").classList.add("invisible");
+}
+
+const newGame = () => {
+    localStorage.removeItem("loadedGame");
+    window.location = "game.html";
+}
+
 const loadGame = (e) => {
     let id = e.target.parentElement.id;
     localStorage.setItem("loadedGame", id);
     window.location = "game.html";
+}
+
+onload = () => {
+    document.getElementById("newGameBtn").addEventListener("click", newGame);
+    document.getElementById("loadGameBtn").addEventListener("click", loadGamesTable);
+    document.getElementById("modal-exit").addEventListener("click", exitLoadModal);
+    document.getElementById("scores-exit").addEventListener("click", exitScoresModal);
+    document.getElementById("contactBtn").addEventListener("click", () => window.location = 'contact.html');
+    document.getElementById("projectBtn").addEventListener("click", () => window.open('https://github.com/fedeargfyron/Juego', '_blank').focus());
+    document.getElementById("trophyIcon").addEventListener("click", loadScoresTable);
 }
